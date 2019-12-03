@@ -1,0 +1,60 @@
+{
+    "name": "vasary/product-manager",
+    "type": "project",
+    "license": "MIT",
+    "description": "Product management servier",
+    "authors": [
+        {
+            "name": "Viktor Gievoi",
+            "email": "gievoi.v@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "keywords": [
+        "service"
+    ],
+    "homepage": "http://product-service.otus.vasary.space",
+    "require": {
+        "php": ">=7.4",
+        "ext-json": "*",
+        "doctrine/annotations": "^1.8",
+        "doctrine/orm": "2.6.4",
+        "monolog/monolog": "^1.25",
+        "php-di/php-di": "^6.0",
+        "slim/psr7": "^0.5",
+        "slim/slim": "^4.3",
+        "symfony/var-dumper": "^4.3",
+        "webmozart/assert": "^1.6"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.5",
+        "roave/security-advisories": "dev-master"
+    },
+    "config": {
+        "process-timeout": 0,
+        "sort-packages": true,
+        "optimize-autoloader": true
+    },
+    "autoload": {
+        "files": [
+            "bootstrap/dependencies.php",
+            "bootstrap/middleware.php",
+            "bootstrap/parameters.php",
+            "bootstrap/routes.php",
+            "bootstrap/functions.php"
+        ],
+        "psr-4": {
+            "Vasary\\ProductManager\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Vasary\\ProductManager\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "./vendor/bin/phpunit",
+        "start": "php -S 0.0.0.0:8080 -t public",
+        "db:schema:update": "./vendor/bin/doctrine orm:schema:update --force"
+    }
+}

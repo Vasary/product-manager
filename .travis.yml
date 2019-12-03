@@ -1,0 +1,33 @@
+branches:
+  only:
+    - master
+
+os: linux
+language: php
+
+git:
+  depth: false
+
+env:
+  global:
+    - DOCKER_COMPOSE_VERSION=1.21.2
+    - IMAGE_NAME=vasary/product-manager
+
+services:
+  - docker
+
+install:
+  - git fetch origin --tags
+
+script:
+  - make build
+
+before_deploy:
+  - docker login -u="$DOCKER_HUB_USER" -p="$DOCKER_HUB_PASSWORD"
+  - VERSION=$(date +'%Y%m%d%H%M')-$(git log --format=%h -1)
+  - docker tag product-manager "${IMAGE_NAME}:latest"
+  - docker tag product-manager "${IMAGE_NAME}:${VERSION}"
+
+deploy:
+  provider: script
+  script: docker push "${IMAGE_NAME}:latest" && docker push "${IMAGE_NAME}:${VERSION}"
