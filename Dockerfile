@@ -1,4 +1,4 @@
-FROM php:7.4-alpine
+FROM php:7.4-fpm-alpine
 
 LABEL maintainer = <gievoi.v@gmail.com>
 
