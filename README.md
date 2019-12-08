@@ -8,6 +8,9 @@ Part of the future micro-services platform.
 * DATABASE_URL (DSN)
 * DEBUG (boolean)
 
+### Extra
+[Start guide](extra/TestingScenario.md)
+
 ### Commands (For development)
 Use `make` for command execution.
 
