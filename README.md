@@ -1,7 +1,9 @@
 # Product manager
 [![Build Status](https://travis-ci.com/Vasary/product-manager.svg?branch=master)](https://travis-ci.com/Vasary/product-manager)
 
-Part of the future micro-services platform. 
+Service which provides the rest API interfaces to control products of my abstract company.
+The manager can create, update, remove products in the warehouse. This is microservice. 
+This will be part of the shop service.  
 
 ### Environment variables
 * ENVIRONMENT
