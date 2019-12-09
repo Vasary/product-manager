@@ -13,12 +13,14 @@ services:
     networks:
       - develop-network
     depends_on:
-      - product-manager-db
+      - product-manager-postgres
     command: composer start
 
-  product-manager-db:
-    container_name: product-manager-db
+  product-manager-postgres:
+    container_name: product-manager-postgres
     image: postgres:12.1
+    ports:
+      - 5432:5432
     environment:
       POSTGRES_PASSWORD: postgres
     networks:
