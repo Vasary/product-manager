@@ -53,8 +53,12 @@
         }
     },
     "scripts": {
+        "start": [
+            "@db:schema:update",
+            "@server_start"
+        ],
         "test": "./vendor/bin/phpunit",
-        "start": "php -S 0.0.0.0:8080 -t public",
+        "server_start": "php -S 0.0.0.0:8080 -t public",
         "db:schema:update": "./vendor/bin/doctrine orm:schema:update --force"
     }
 }

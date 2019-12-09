@@ -1,0 +1,29 @@
+version: '2.2'
+
+services:
+  product-manager-php:
+    container_name: product-manager-php
+    build: .
+    ports:
+      - 8080:8080
+    env_file:
+      - ./env/.env.develop
+    volumes:
+      - ./app:/application
+    networks:
+      - develop-network
+    depends_on:
+      - product-manager-db
+    command: composer start
+
+  product-manager-db:
+    container_name: product-manager-db
+    image: postgres:12.1
+    environment:
+      POSTGRES_PASSWORD: postgres
+    networks:
+      - develop-network
+
+networks:
+  develop-network:
+    external: true
