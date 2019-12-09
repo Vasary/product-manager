@@ -20,6 +20,10 @@ This command will do the next action:
 * Update database schema
 * Read for work
 
+### Application design
+
+[![extra/flow.png](extra/flow.png)](extra/flow.png)
+
 ### Extra
 [Requests collection](extra/TestingScenario.md)
 
