@@ -2,13 +2,13 @@
 
 namespace Vasary\ProductManager\Controller\Product;
 
+use JMS\Serializer\ArrayTransformerInterface;
+use JMS\Serializer\SerializerInterface;
 use Psr\Http\Message\ResponseInterface;
-use ReflectionException;
 use Slim\Psr7\Request;
 use Slim\Psr7\Response;
 use Vasary\ProductManager\Handler\ProductReadHandler;
 use Vasary\ProductManager\Service\Response\JsonResponse;
-use Vasary\ProductManager\Service\Serializer\Serializer;
 use Webmozart\Assert\Assert;
 
 /**
@@ -23,16 +23,16 @@ final class ReadController
     private ProductReadHandler $handler;
 
     /**
-     * @var Serializer
+     * @var SerializerInterface | ArrayTransformerInterface
      */
-    private Serializer $serializer;
+    private SerializerInterface $serializer;
 
     /**
      * ReadController constructor.
      * @param ProductReadHandler $handler
-     * @param Serializer $serializer
+     * @param SerializerInterface $serializer
      */
-    public function __construct(ProductReadHandler $handler, Serializer $serializer)
+    public function __construct(ProductReadHandler $handler, SerializerInterface $serializer)
     {
         $this->handler = $handler;
         $this->serializer = $serializer;
@@ -44,14 +44,12 @@ final class ReadController
      * @param array $arguments
      *
      * @return Response
-     *
-     * @throws ReflectionException
      */
     public function __invoke(Request $request, Response $response, array $arguments): ResponseInterface
     {
         Assert::keyExists($arguments, 'id');
         Assert::greaterThan($arguments['id'], 0);
 
-        return JsonResponse::create($this->serializer->serializeObject($this->handler->handle($arguments['id'])));
+        return JsonResponse::create($this->serializer->toArray($this->handler->handle($arguments['id'])));
     }
 }

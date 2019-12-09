@@ -3,8 +3,8 @@
 namespace Vasary\ProductManager\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Vasary\ProductManager\Annotation\Serializer;
 use Webmozart\Assert\Assert;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * @ORM\Entity(repositoryClass="Doctrine\ORM\EntityRepository")
@@ -19,7 +19,8 @@ class Product
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue
      *
-     * @Serializer(type="integer", name="id")
+     * @Serializer\SerializedName("id")
+     * @Serializer\Type("integer")
      */
     private ?int $id;
 
@@ -28,7 +29,8 @@ class Product
      *
      * @ORM\Column(type="string", name="name")
      *
-     * @Serializer(type="string", name="name")
+     * @Serializer\SerializedName("name")
+     * @Serializer\Type("string")
      */
     private string $name;
 
@@ -37,7 +39,8 @@ class Product
      *
      * @ORM\Column(type="string", name="description")
      *
-     * @Serializer(type="string", name="description")
+     * @Serializer\SerializedName("description")
+     * @Serializer\Type("string")
      */
     private string $description;
 

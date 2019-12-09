@@ -19,6 +19,7 @@
         "ext-json": "*",
         "doctrine/annotations": "^1.8",
         "doctrine/orm": "2.6.4",
+        "jms/serializer": "^3.3",
         "monolog/monolog": "^1.25",
         "php-di/php-di": "^6.0",
         "slim/psr7": "^0.5",

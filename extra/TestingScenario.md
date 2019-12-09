@@ -21,7 +21,7 @@ curl --location --request POST 'http://localhost:8080/product' \
 ### Update product
 Important: in request you need to replace {{$id}} to needful product id.
 ```
-curl --location --request PUT 'http://localhost:8080/product/{{$id}}' \
+curl --location --request PUT 'http://localhost:8080/product/24' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "description": "Test product description",

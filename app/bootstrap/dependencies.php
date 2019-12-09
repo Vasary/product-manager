@@ -6,6 +6,9 @@ use DI\ContainerBuilder;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\Reader;
 use Doctrine\ORM\EntityManagerInterface;
+use JMS\Serializer\Naming\IdenticalPropertyNamingStrategy;
+use JMS\Serializer\Naming\SerializedNameAnnotationStrategy;
+use JMS\Serializer\SerializerInterface;
 use Monolog\Formatter\LogstashFormatter;
 use Monolog\Handler\ErrorLogHandler;
 use Monolog\Logger;
@@ -16,7 +19,6 @@ use Psr\Log\LoggerInterface;
 use Vasary\ProductManager\Service\ErrorHandler;
 use Vasary\ProductManager\Service\Log\Processor\ExtraDataProcessor;
 use Vasary\ProductManager\Service\ORM\EntityManagerProvider;
-use Vasary\ProductManager\Service\Serializer\Serializer;
 
 use function DI\autowire;
 use function DI\create;
@@ -67,8 +69,17 @@ function injectDependencies(ContainerBuilder $containerBuilder): void
         /**
         * Services
         */
-        Serializer::class   => autowire(Serializer::class),
-        Reader::class       => create(AnnotationReader::class),
+        SerializerInterface::class => static function () {
+            return
+                JMS\Serializer\SerializerBuilder::create()
+                    ->setPropertyNamingStrategy(
+                        new SerializedNameAnnotationStrategy(
+                            new IdenticalPropertyNamingStrategy()
+                        )
+                    )
+                    ->build()
+            ;
+        },
 
         /**
          * Logging

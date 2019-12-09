@@ -4,9 +4,10 @@ namespace Vasary\ProductManager\Handler;
 
 use Doctrine\ORM\EntityManagerInterface;
 use InvalidArgumentException;
+use JMS\Serializer\ArrayTransformerInterface;
+use JMS\Serializer\SerializerInterface;
 use ReflectionException;
 use Vasary\ProductManager\Entity\Product;
-use Vasary\ProductManager\Service\Serializer\Serializer;
 
 /**
  * Class ProductUpdateHandler
@@ -20,16 +21,16 @@ final class ProductUpdateHandler
     private EntityManagerInterface $entityManager;
 
     /**
-     * @var Serializer
+     * @var SerializerInterface | ArrayTransformerInterface
      */
-    private Serializer $serializer;
+    private SerializerInterface $serializer;
 
     /**
      * ProductUpdateHandler constructor.
      * @param EntityManagerInterface $entityManager
-     * @param Serializer $serializer
+     * @param SerializerInterface $serializer
      */
-    public function __construct(EntityManagerInterface $entityManager, Serializer $serializer)
+    public function __construct(EntityManagerInterface $entityManager, SerializerInterface $serializer)
     {
         $this->entityManager = $entityManager;
         $this->serializer = $serializer;
@@ -39,13 +40,14 @@ final class ProductUpdateHandler
      * @param int $id
      * @param array $data
      * @return Product
-     * @throws ReflectionException
      */
     public function handle(int $id, array $data): Product
     {
         $product = $this->findProduct($id);
 
-        $this->serializer->update($product, $data);
+        // $product = $this->serializer->fromArray($data, Product::class);
+
+        var_dump($this->serializer->fromArray($data, Product::class)); exit;
 
         $this->entityManager->persist($product);
 

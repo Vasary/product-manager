@@ -1,9 +1,10 @@
 <?php
 
 use Doctrine\ORM\Tools\Console\ConsoleRunner;
-use Vasary\ProductManager\Annotation\Serializer;
+use JMS\Serializer\Annotation as Serializer;
 use Vasary\ProductManager\Service\ORM\EntityManagerProvider;
 
-class_exists(Serializer::class);
+class_exists(Serializer\Type::class);
+class_exists(Serializer\SerializedName::class);
 
 return ConsoleRunner::createHelperSet(EntityManagerProvider::build(getenv('DATABASE_URL')));

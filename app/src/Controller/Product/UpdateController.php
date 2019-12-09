@@ -2,12 +2,13 @@
 
 namespace Vasary\ProductManager\Controller\Product;
 
+use JMS\Serializer\ArrayTransformerInterface;
+use JMS\Serializer\SerializerInterface;
 use Psr\Http\Message\ResponseInterface;
 use ReflectionException;
 use Slim\Psr7\Request;
 use Vasary\ProductManager\Handler\ProductUpdateHandler;
 use Vasary\ProductManager\Service\Response\JsonResponse;
-use Vasary\ProductManager\Service\Serializer\Serializer;
 
 /**
  * Class UpdateController
@@ -21,16 +22,16 @@ final class UpdateController
     private ProductUpdateHandler $handler;
 
     /**
-     * @var Serializer
+     * @var SerializerInterface | ArrayTransformerInterface
      */
-    private Serializer $serializer;
+    private SerializerInterface $serializer;
 
     /**
      * CreateController constructor.
      * @param ProductUpdateHandler $handler
-     * @param Serializer $serializer
+     * @param SerializerInterface $serializer
      */
-    public function __construct(ProductUpdateHandler $handler, Serializer $serializer)
+    public function __construct(ProductUpdateHandler $handler, SerializerInterface $serializer)
     {
         $this->handler = $handler;
         $this->serializer = $serializer;
@@ -41,13 +42,12 @@ final class UpdateController
      * @param ResponseInterface $response
      * @param array $arguments
      * @return ResponseInterface
-     * @throws ReflectionException
      */
     public function __invoke(Request $request, ResponseInterface $response, array $arguments): ResponseInterface
     {
         return
             JsonResponse::create(
-                $this->serializer->serializeObject(
+                $this->serializer->toArray(
                     $this->handler->handle(
                         $arguments['id'],
                         $request->getParsedBody()
