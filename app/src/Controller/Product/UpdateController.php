@@ -47,12 +47,7 @@ final class UpdateController
     {
         return
             JsonResponse::create(
-                $this->serializer->toArray(
-                    $this->handler->handle(
-                        $arguments['id'],
-                        $request->getParsedBody()
-                    )
-                )
+                $this->serializer->toArray($this->handler->handle($request->getParsedBody()))
             )
         ;
     }

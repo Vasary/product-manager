@@ -18,5 +18,5 @@ function routes(App $app): void
     $app->post('/product', CreateController::class);
     $app->get('/product/{id}', ReadController::class);
     $app->delete('/product/{id}', RemoveController::class);
-    $app->put('/product/{id}', UpdateController::class);
+    $app->put('/product', UpdateController::class);
 }
