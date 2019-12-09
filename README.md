@@ -10,8 +10,18 @@ This will be part of the shop service.
 * DATABASE_URL (DSN)
 * DEBUG (boolean)
 
+### Quick start
+```
+# docker-compose up -d
+```
+This command will do the next action:
+* Starts Postgres
+* Starts PHP
+* Update database schema
+* Read for work
+
 ### Extra
-[Start guide](extra/TestingScenario.md)
+[Requests collection](extra/TestingScenario.md)
 
 ### Commands (For development)
 Use `make` for command execution.
