@@ -21,7 +21,7 @@
         "doctrine/orm": "2.6.4",
         "monolog/monolog": "^1.25",
         "php-di/php-di": "^6.0",
-        "slim/psr7": "^0.5",
+        "slim/psr7": "^1.6",
         "slim/slim": "^4.3",
         "symfony/var-dumper": "^4.3",
         "webmozart/assert": "^1.6"
